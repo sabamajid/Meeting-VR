@@ -28,9 +28,9 @@ public class JSON : MonoBehaviour
         public Agent[] agents;
     }
 
-    private string apiUrl = "https://agent-meet-backend.chillkro.com";
+   // private string apiUrl = "https://agent-meet-backend.chillkro.com";
 
-
+    private string apiUrl = "https://8bc6-182-185-140-19.ngrok-free.app/api";
 
     private void Awake()
     {

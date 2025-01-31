@@ -10,10 +10,9 @@ public class ButtonGenerator : MonoBehaviour
     public GameObject buttonPrefab;
     public Transform buttonParent;
     private List<string> selectedNames = new List<string>(); // List to store selected names
-    private Dictionary<Button, Color> originalColors = new Dictionary<Button, Color>(); // Store original button colors
 
-    private bool serverWorking = false; // Set to true when the server is working
-    private Color selectedColor = Color.green; // Change this to any color you like
+    private Color selectedColor = Color.green;
+    private Color defaultColor = Color.white;
 
     private void Awake()
     {
@@ -21,70 +20,45 @@ public class ButtonGenerator : MonoBehaviour
         {
             instance = this;
         }
-
-        // If the server is not working, generate test buttons
-        if (!serverWorking)
-        {
-            GenerateTestButtons();
-        }
     }
 
     public void GenerateButtons(Agent[] agents)
     {
-        if (!serverWorking)
-        {
-            return; // Skip if the server is not working
-        }
-
         foreach (var agent in agents)
         {
-            CreateButton(agent.name);
+            CreateButton(agent);
         }
     }
 
-    void GenerateTestButtons()
-    {
-        for (int i = 1; i <= 5; i++)
-        {
-            CreateButton("Testing " + i);
-        }
-    }
-
-    void CreateButton(string buttonName)
+    void CreateButton(Agent agent)
     {
         // Instantiate a button from the prefab
-        GameObject buttonObj = Instantiate(buttonPrefab, buttonParent);
+        GameObject button = Instantiate(buttonPrefab, buttonParent);
 
-        // Set the button text
-        Text buttonText = buttonObj.GetComponentInChildren<Text>();
-        buttonText.text = buttonName;
-
-        // Get Button component
-        Button btn = buttonObj.GetComponent<Button>();
-
-        // Store the original button color
-        Color originalColor = btn.image.color;
-        originalColors[btn] = originalColor;
+        // Set the button text to the agent's name
+        Text buttonText = button.GetComponentInChildren<Text>();
+        buttonText.text = agent.name;
 
         // Add a listener to handle button clicks
-        btn.onClick.AddListener(() => OnButtonClicked(buttonName, btn));
+        Button btn = button.GetComponent<Button>();
+        btn.onClick.AddListener(() => OnButtonClicked(agent, btn));
     }
 
-    void OnButtonClicked(string buttonName, Button btn)
+    void OnButtonClicked(Agent agent, Button btn)
     {
-        Debug.Log("Button clicked: " + buttonName);
+        Debug.Log("Button clicked for agent: " + agent.name);
 
-        if (!selectedNames.Contains(buttonName))
+        // Add or remove from selected names list
+        if (!selectedNames.Contains(agent.name))
         {
-            // Select the button
-            selectedNames.Add(buttonName);
-            btn.image.color = selectedColor;
+            selectedNames.Add(agent.name);
+            btn.GetComponent<Image>().color = selectedColor; // Change to green
         }
         else
         {
-            // Deselect the button and revert color
-            selectedNames.Remove(buttonName);
-            btn.image.color = originalColors[btn];
+            selectedNames.Remove(agent.name);
+            btn.GetComponent<Image>().color = defaultColor; // Change back to default
+            Debug.Log($"{agent.name} is deselected.");
         }
     }
 

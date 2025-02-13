@@ -1,24 +1,52 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using Oculus.Voice;
-using Meta.WitAi.CallbackHandlers;
+using System.Collections;
 
 public class VoiceTranscriptionHandler : MonoBehaviour
 {
+    public static VoiceTranscriptionHandler Instance { get; private set; }
+
     [Header("Wit Configuration")]
     [SerializeField] private AppVoiceExperience appVoiceExperience;
     [SerializeField] private TextMeshProUGUI transcriptionText;
 
-    public UnityEvent<string> completeTranscription;
+    public UnityEvent<string> onTranscriptionComplete;
+    private bool isRecording = false;
+    private string finalTranscription = "";
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        StartRecording();
+        StartCoroutine(ShowMessageAfterDelay("Hello, Unity!", 5f));
+    }
+
+    private IEnumerator ShowMessageAfterDelay(string message, float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for 'delay' seconds
+     
+       StopRecording();   // Stop and send message
+        Debug.Log("🕒 " + message);
+    }
     private void OnEnable()
     {
         if (appVoiceExperience != null)
         {
             appVoiceExperience.VoiceEvents.OnPartialTranscription.AddListener(OnPartialTranscription);
             appVoiceExperience.VoiceEvents.OnFullTranscription.AddListener(OnFullTranscription);
-            appVoiceExperience.VoiceEvents.OnRequestCompleted.AddListener(RestartListening);
         }
     }
 
@@ -28,36 +56,41 @@ public class VoiceTranscriptionHandler : MonoBehaviour
         {
             appVoiceExperience.VoiceEvents.OnPartialTranscription.RemoveListener(OnPartialTranscription);
             appVoiceExperience.VoiceEvents.OnFullTranscription.RemoveListener(OnFullTranscription);
-            appVoiceExperience.VoiceEvents.OnRequestCompleted.RemoveListener(RestartListening);
-        }
-    }
-
-    private void Awake()
-    {
-        if (appVoiceExperience != null)
-        {
-            appVoiceExperience.Activate();
-        }
-        else
-        {
-            Debug.LogError("AppVoiceExperience is not set!");
         }
     }
 
     private void OnPartialTranscription(string transcription)
     {
-        transcriptionText.text = transcription; // Show real-time text
+        transcriptionText.text = transcription;
     }
 
     private void OnFullTranscription(string transcription)
     {
-        transcriptionText.text += "\n" + transcription; // Append new text
-        completeTranscription?.Invoke(transcription);
+        finalTranscription = transcription;
+        transcriptionText.text = finalTranscription;
+        onTranscriptionComplete?.Invoke(finalTranscription);
     }
 
-    private void RestartListening()
+    public void StartRecording()
     {
-        Debug.Log("Restarting voice recognition...");
-        appVoiceExperience.Activate(); // Keep it running continuously
+        if (!isRecording)
+        {
+            isRecording = true;
+            appVoiceExperience.Activate();
+            Debug.Log("🎤 Voice recording started...");
+        }
+    }
+
+    public void StopRecording()
+    {
+        if (isRecording)
+        {
+            isRecording = false;
+            appVoiceExperience.Deactivate();
+            Debug.Log("🛑 Voice recording stopped.");
+
+            // Send message through WebSocket
+            WebSocketClient.Instance.SendMessageToServer(finalTranscription);
+        }
     }
 }

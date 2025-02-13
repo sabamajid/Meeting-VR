@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class WebSocketResponse
@@ -21,15 +22,30 @@ public class MessageData
 
 public class WebSocketClient : MonoBehaviour
 {
+    private static WebSocketClient instance;  // Singleton instance
     private ClientWebSocket webSocket;
+    public TextMeshProUGUI responseText;  // UI Text
+    private AndroidTextToSpeech tts;      // Reference to TTS system
+
+    public static WebSocketClient Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("WebSocketClient");
+                instance = obj.AddComponent<WebSocketClient>();
+                DontDestroyOnLoad(obj);
+            }
+            return instance;
+        }
+    }
 
     private async void Start()
     {
+        instance = this; // Set instance
+        tts = FindObjectOfType<AndroidTextToSpeech>(); // Find TTS script
         await ConnectToWebSocket();
-
-        // Wait 5 seconds before sending a message
-        await Task.Delay(5000);
-        await SendMessageToServer();
     }
 
     private async Task ConnectToWebSocket()
@@ -43,20 +59,15 @@ public class WebSocketClient : MonoBehaviour
             await webSocket.ConnectAsync(serverUri, CancellationToken.None);
             Debug.Log("✅ Connected to WebSocket server.");
 
-            // Start listening for messages
-            _ = ReceiveMessages();
-        }
-        catch (WebSocketException wsEx)
-        {
-            Debug.LogError("❌ WebSocketException: " + wsEx.Message);
+            _ = ReceiveMessages(); // Start receiving messages
         }
         catch (Exception ex)
         {
-            Debug.LogError("❌ General Exception: " + ex.Message);
+            Debug.LogError("❌ WebSocket Connection Failed: " + ex.Message);
         }
     }
 
-    public async Task SendMessageToServer()
+    public async Task SendMessageToServer(string message)
     {
         if (webSocket == null || webSocket.State != WebSocketState.Open)
         {
@@ -64,7 +75,7 @@ public class WebSocketClient : MonoBehaviour
             return;
         }
 
-        string jsonMessage = "{\"message\": \"How to improve sales for our product agency erp\"}";
+        string jsonMessage = "{\"message\": \"" + message + "\"}";
         byte[] bytes = Encoding.UTF8.GetBytes(jsonMessage);
 
         await webSocket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, CancellationToken.None);
@@ -82,15 +93,15 @@ public class WebSocketClient : MonoBehaviour
 
             Debug.Log("📩 Received: " + jsonString);
 
-            // Deserialize the JSON into a C# object
             try
             {
                 WebSocketResponse response = JsonUtility.FromJson<WebSocketResponse>(jsonString);
-
                 if (response != null)
                 {
-                    Debug.Log($"🗣️ Agent: {response.message.agent}");
-                    Debug.Log($"💬 Message: {response.message.content}");
+                    string receivedMessage = response.message.content;
+
+                    // Call UI update and TTS from the main thread using Coroutine
+                    StartCoroutine(UpdateUIAndSpeak(receivedMessage));
                 }
                 else
                 {
@@ -101,6 +112,17 @@ public class WebSocketClient : MonoBehaviour
             {
                 Debug.LogError("⚠️ JSON Parsing Error: " + ex.Message);
             }
+        }
+    }
+
+    private System.Collections.IEnumerator UpdateUIAndSpeak(string text)
+    {
+        responseText.text = text; // Update UI text
+        yield return new WaitForSeconds(0.1f); // Small delay to ensure UI updates
+
+        if (tts != null)
+        {
+            tts.SpeakText(text);
         }
     }
 

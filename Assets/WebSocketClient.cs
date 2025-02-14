@@ -119,11 +119,7 @@ public class WebSocketClient : MonoBehaviour
     {
         responseText.text = text; // Update UI text
         yield return new WaitForSeconds(0.1f); // Small delay to ensure UI updates
-
-        if (tts != null)
-        {
-            tts.SpeakText(text);
-        }
+        SimpleRTVoiceExample.instance.Speak(text);
     }
 
     private async void OnApplicationQuit()

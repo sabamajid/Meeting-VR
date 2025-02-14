@@ -143,7 +143,9 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 5269706996647393442, guid: e3aee76b9372917449aef639e2f74814, type: 2}
+  - {fileID: 3233996788981779080, guid: 87b413c5a910b15498a98200731b1754, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -829,9 +831,21 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: USE_INPUT_SYSTEM_POSE_CONTROL
-    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL
-    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL
+    Android: USE_INPUT_SYSTEM_POSE_CONTROL;CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    EmbeddedLinux: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    GameCoreXboxOne: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    Nintendo Switch: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    PS4: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    PS5: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    QNX: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    Stadia: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    VisionOS: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    WebGL: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    XboxOne: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    iPhone: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
+    tvOS: CT_RTV;CT_PROC;CT_UI;CT_RTV_DEMO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

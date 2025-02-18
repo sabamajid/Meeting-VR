@@ -2,6 +2,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class AuthManager : MonoBehaviour
 {
@@ -102,6 +103,7 @@ public class AuthManager : MonoBehaviour
             if (www.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("User Registered Successfully: " + www.downloadHandler.text);
+                SceneManager.LoadScene("Registration");
             }
             else
             {
@@ -146,6 +148,7 @@ public class AuthManager : MonoBehaviour
                 // SceneManager.LoadScene("HomeScene");
 
                 Debug.Log("Tokens saved successfully.");
+                SceneManager.LoadScene("Main Menu");
             }
             else
             {

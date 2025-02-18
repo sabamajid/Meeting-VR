@@ -32,6 +32,30 @@ public class AuthManager : MonoBehaviour
         public string role = "USER"; // Default value for role
         public string contact;
     }
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public string message;
+        public Tokens tokens;
+        public User user;
+
+        [System.Serializable]
+        public class Tokens
+        {
+            public string access;
+            public string refresh;
+        }
+
+        [System.Serializable]
+        public class User
+        {
+            public int id;
+            public string email;
+            public string first_name;
+            public string last_name;
+            public string role;
+        }
+    }
 
     // Register user method
     public void RegisterUser(string firstName, string lastName, string email, string contact, string password, string confirmPassword)
@@ -91,7 +115,7 @@ public class AuthManager : MonoBehaviour
     private IEnumerator PostLoginUserRequest(string email, string password)
     {
         string json = $"{{\"email\":\"{email}\",\"password\":\"{password}\"}}";
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
 
         using (UnityWebRequest www = new UnityWebRequest(BASE_URL + "api/auth/login/", "POST"))
         {
@@ -104,6 +128,24 @@ public class AuthManager : MonoBehaviour
             if (www.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log("Login Successful: " + www.downloadHandler.text);
+                // Parse the login response
+                LoginResponse response = JsonUtility.FromJson<LoginResponse>(www.downloadHandler.text);
+
+                // Save the tokens
+                PlayerPrefs.SetString("access_token", response.tokens.access);
+                PlayerPrefs.SetString("refresh_token", response.tokens.refresh);
+
+                // Optionally save user info (if needed)
+                PlayerPrefs.SetInt("user_id", response.user.id);
+                PlayerPrefs.SetString("user_email", response.user.email);
+                PlayerPrefs.SetString("user_first_name", response.user.first_name);
+                PlayerPrefs.SetString("user_last_name", response.user.last_name);
+                PlayerPrefs.SetString("user_role", response.user.role);
+
+                // Load next scene or home screen (if applicable)
+                // SceneManager.LoadScene("HomeScene");
+
+                Debug.Log("Tokens saved successfully.");
             }
             else
             {
@@ -113,8 +155,8 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    // Handle Guest User Login (if applicable)
-    public void GuestUserLogin()
+        // Handle Guest User Login (if applicable)
+        public void GuestUserLogin()
     {
         PlayerPrefs.SetInt("guest", 1);
         // If you need to handle guest login via API, add the necessary code here.

@@ -21,26 +21,53 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    public void RegisterUser(string firstName, string lastName, string email, string contact, string password, string confirmPassword)
+    // Data class for Registering User
+    [System.Serializable]
+    public class RegisterUserData
     {
-        Debug.Log("Registering User...");
-        StartCoroutine(PostRegisterUserRequest(firstName, lastName, email, contact, password, confirmPassword));
+        public string email;
+        public string password;
+        public string first_name;
+        public string last_name;
+        public string role = "USER"; // Default value for role
+        public string contact;
     }
 
+    // Register user method
+    public void RegisterUser(string firstName, string lastName, string email, string contact, string password, string confirmPassword)
+    {
+        if (password != confirmPassword)
+        {
+            Debug.Log("Passwords do not match.");
+            return;
+        }
+        Debug.Log("Registering User...");
+        RegisterUserData userData = new RegisterUserData
+        {
+            email = email,
+            password = password,
+            first_name = firstName,
+            last_name = lastName,
+            contact = contact
+        };
+
+        StartCoroutine(PostRegisterUserRequest(userData));
+    }
+
+    // Login user method
     public void LoginUser(string email, string password)
     {
         Debug.Log("Logging in User...");
         StartCoroutine(PostLoginUserRequest(email, password));
     }
 
-
-    private IEnumerator PostRegisterUserRequest(string firstName, string lastName, string email, string contact, string password, string confirmPassword)
+    // Post request to register user
+    private IEnumerator PostRegisterUserRequest(RegisterUserData userData)
     {
-        string requestName = "api/auth/register/";
-        string json = $"{{\"first_name\":\"{firstName}\",\"last_name\":\"{lastName}\",\"email\":\"{email}\",\"contact\":\"{contact}\",\"password\":\"{password}\",\"confirm_password\":\"{confirmPassword}\"}}";
+        string json = JsonUtility.ToJson(userData); // Convert user data to JSON
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest(BASE_URL + requestName, "POST"))
+        using (UnityWebRequest www = new UnityWebRequest(BASE_URL + "api/auth/register/", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -60,13 +87,13 @@ public class AuthManager : MonoBehaviour
         }
     }
 
+    // Post request to login user
     private IEnumerator PostLoginUserRequest(string email, string password)
     {
-        string requestName = "api/auth/login/";
         string json = $"{{\"email\":\"{email}\",\"password\":\"{password}\"}}";
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest(BASE_URL + requestName, "POST"))
+        using (UnityWebRequest www = new UnityWebRequest(BASE_URL + "api/auth/login/", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
@@ -86,5 +113,10 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    
+    // Handle Guest User Login (if applicable)
+    public void GuestUserLogin()
+    {
+        PlayerPrefs.SetInt("guest", 1);
+        // If you need to handle guest login via API, add the necessary code here.
+    }
 }

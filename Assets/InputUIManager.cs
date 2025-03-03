@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class InputUIManager : MonoBehaviour
 {
     [Header("Signin Input Area")]
-    public TMP_InputField signInEmailInputField;
-    public TMP_InputField signInPasswordInputField;
+    public InputField signInEmailInputField;
+    public InputField signInPasswordInputField;
 
     [Header("SignUp Input Area")]
-    public TMP_InputField firstNameInputField;
-    public TMP_InputField secondNameInputField;
-    public TMP_InputField signUpEmailInputField;
-    public TMP_InputField contactInputField;
-    public TMP_InputField signUpPasswordInputField;
-    public TMP_InputField confirmPasswordInputField;
+    public InputField firstNameInputField;
+    public InputField secondNameInputField;
+    public InputField signUpEmailInputField;
+    public InputField contactInputField;
+    public InputField signUpPasswordInputField;
+    public InputField confirmPasswordInputField;
 
     private const string MatchEmailPattern =
         @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"

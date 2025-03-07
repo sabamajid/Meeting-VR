@@ -148,7 +148,7 @@ public class AuthManager : MonoBehaviour
                 // SceneManager.LoadScene("HomeScene");
 
                 Debug.Log("Tokens saved successfully.");
-                SceneManager.LoadScene("Main Menu");
+                SceneManager.LoadScene("Main Menu 2");
             }
             else
             {

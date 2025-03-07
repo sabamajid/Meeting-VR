@@ -3435,7 +3435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: username@gmail.com
+  m_Text: 
 --- !u!222 &110154258
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7583,7 +7583,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: username@gmail.com
+  m_Text: 
 --- !u!222 &263125326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11285,7 +11285,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10.13, y: 20.000002}
-  m_SizeDelta: {x: 40, y: 15}
+  m_SizeDelta: {x: 114.04, y: 15}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &399326940
 MonoBehaviour:
@@ -11321,7 +11321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: First Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: fbb7c6a04be6d8341934b839f24b42e1,
@@ -11356,7 +11356,7 @@ MonoBehaviour:
   m_fontSizeMin: 12
   m_fontSizeMax: 12
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -11951,7 +11951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: 'Email '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: fbb7c6a04be6d8341934b839f24b42e1,
@@ -11986,7 +11986,7 @@ MonoBehaviour:
   m_fontSizeMin: 12
   m_fontSizeMax: 12
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -16986,7 +16986,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: username@gmail.com
+  m_Text: 
 --- !u!222 &565266401
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26726,7 +26726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &915113300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26736,7 +26736,7 @@ RectTransform:
   m_GameObject: {fileID: 915113299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 1.5, z: 2}
+  m_LocalScale: {x: 2, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1518526906}
@@ -26747,10 +26747,10 @@ RectTransform:
   - {fileID: 2023937162}
   m_Father: {fileID: 3093414213089617735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 512, y: -24}
+  m_SizeDelta: {x: 976, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &921208518
 GameObject:
@@ -29053,7 +29053,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10.13, y: 20.000002}
-  m_SizeDelta: {x: 95.02, y: 15.17}
+  m_SizeDelta: {x: 124.91, y: 15.17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1007478700
 MonoBehaviour:
@@ -29089,7 +29089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Password
+  m_text: Confirm Password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: fbb7c6a04be6d8341934b839f24b42e1,
@@ -43192,12 +43192,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   signInEmailInputField: {fileID: 1518526903}
   signInPasswordInputField: {fileID: 520238556}
-  firstNameInputField: {fileID: 0}
-  secondNameInputField: {fileID: 0}
-  signUpEmailInputField: {fileID: 0}
-  contactInputField: {fileID: 0}
-  signUpPasswordInputField: {fileID: 0}
-  confirmPasswordInputField: {fileID: 0}
+  firstNameInputField: {fileID: 100592568}
+  secondNameInputField: {fileID: 1653357617}
+  signUpEmailInputField: {fileID: 1878117547}
+  contactInputField: {fileID: 1851517077}
+  signUpPasswordInputField: {fileID: 1660166488}
+  confirmPasswordInputField: {fileID: 1114316947}
 --- !u!4 &1411427282
 Transform:
   m_ObjectHideFlags: 0
@@ -44798,7 +44798,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10.13, y: 20.000002}
-  m_SizeDelta: {x: 40, y: 15}
+  m_SizeDelta: {x: 90.62, y: 15}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1474578976
 MonoBehaviour:
@@ -44834,7 +44834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: Last Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: fbb7c6a04be6d8341934b839f24b42e1,
@@ -44869,7 +44869,7 @@ MonoBehaviour:
   m_fontSizeMin: 12
   m_fontSizeMax: 12
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -56061,13 +56061,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1851517078}
   m_TextComponent: {fileID: 1398790967}
   m_Placeholder: {fileID: 263125325}
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnSubmit:
     m_PersistentCalls:
@@ -56686,7 +56686,7 @@ GameObject:
   - component: {fileID: 1878117548}
   - component: {fileID: 1878117547}
   m_Layer: 0
-  m_Name: Email Name
+  m_Name: 'Email '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63396,7 +63396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2067476030
 RectTransform:
   m_ObjectHideFlags: 0
@@ -63406,7 +63406,7 @@ RectTransform:
   m_GameObject: {fileID: 2067476029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 1.5, z: 2}
+  m_LocalScale: {x: 2, y: 1.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 100592567}
@@ -63420,10 +63420,10 @@ RectTransform:
   - {fileID: 327239856}
   m_Father: {fileID: 3093414213089617735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 512, y: -24}
-  m_SizeDelta: {x: 976, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2073165872
 GameObject:
@@ -63461,7 +63461,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10.13, y: 20.000002}
-  m_SizeDelta: {x: 40, y: 15}
+  m_SizeDelta: {x: 116.19, y: 15}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2073165874
 MonoBehaviour:
@@ -63497,7 +63497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Email
+  m_text: Contact number
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: fbb7c6a04be6d8341934b839f24b42e1,
@@ -63532,7 +63532,7 @@ MonoBehaviour:
   m_fontSizeMin: 12
   m_fontSizeMax: 12
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -75925,7 +75925,7 @@ PositionConstraint:
   serializedVersion: 2
   m_Weight: 1
   m_TranslationAtRest: {x: 0.12600002, y: -0.246, z: 0.00000011920929}
-  m_TranslationOffset: {x: -0.022000015, y: 0.0039999634, z: 0}
+  m_TranslationOffset: {x: -0.022000045, y: 0.0039999634, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
@@ -77982,7 +77982,7 @@ Transform:
   m_GameObject: {fileID: 6500858715739887390}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25100008, y: -0.20500003, z: 0}
+  m_LocalPosition: {x: 0.25100014, y: -0.20500003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -93386,7 +93386,7 @@ Transform:
   m_GameObject: {fileID: 832327772394556780}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.29600006, y: -0.25000003, z: 0}
+  m_LocalPosition: {x: 0.29600012, y: -0.25000003, z: 0}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114008,7 +114008,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809972191803860779}
   m_LocalRotation: {x: 0.0000002682209, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7.7}
   m_LocalScale: {x: 1.46, y: -1, z: 109}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114016,8 +114016,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 11.799988}
+  m_SizeDelta: {x: 0, y: 307.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7529412905672325778
 MonoBehaviour:
@@ -115648,7 +115648,6 @@ Transform:
   - {fileID: 7894069286252449733}
   - {fileID: 4612508532410503022}
   - {fileID: 759430396240882802}
-  - {fileID: 9026003016333842535}
   - {fileID: 8610561639358708838}
   - {fileID: 3763362637353626920}
   - {fileID: 2199158995556097625}
@@ -120296,6 +120295,7 @@ Transform:
   - {fileID: 4494969809348604136}
   - {fileID: 2031632190670965161}
   - {fileID: 8257250788908167162}
+  - {fileID: 9026003016333842535}
   m_Father: {fileID: 7835063497339912584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &8610912296561886342
@@ -122753,7 +122753,7 @@ RectTransform:
   m_GameObject: {fileID: 1469441440639691524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0003, y: 0.0007, z: 0.0005}
+  m_LocalScale: {x: 0.0003, y: 0.00045, z: 0.0005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3093414213089617735}
@@ -122995,12 +122995,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717625233463891868}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.296, y: -0.25, z: 0.00000003108289}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.29600006, y: -0.25000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7835063497339912584}
+  m_Father: {fileID: 8610561639358708838}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9026898726895253721
 MonoBehaviour:
@@ -123715,7 +123715,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5069300515907935356}
   m_LocalRotation: {x: 0.0000002682209, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.0900047}
+  m_LocalPosition: {x: 0, y: 0, z: 8.8}
   m_LocalScale: {x: 1.09, y: 3.17, z: 109}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -123723,8 +123723,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -11.799988}
+  m_SizeDelta: {x: 0, y: -514.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &9128940200465272352
 RectTransform:

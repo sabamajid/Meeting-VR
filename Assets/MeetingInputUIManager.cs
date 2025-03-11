@@ -29,5 +29,6 @@ public class MeetingInputUIManager : MonoBehaviour
         }
 
         Debug.Log("Meeting Created: " + titleInputField.text);
-   
+
+    }
 }

@@ -751,6 +751,7 @@ namespace UI.Dates
                 {
                     case Dates.DateSelectionMode.SingleDate:
                         Ref_InputField.text = (SelectedDate.HasValue) ? SelectedDate.Date.ToString(Config.Format.DateFormat) : "";
+                        gameObject.SetActive(false);
                         break;
                     case Dates.DateSelectionMode.MultipleDates:
                         var valueCount = SelectedDates.Count(s => s.HasValue);

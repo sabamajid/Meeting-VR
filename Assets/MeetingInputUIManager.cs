@@ -9,6 +9,9 @@ public class MeetingInputUIManager : MonoBehaviour
     public InputField descriptionInputField;
     public InputField summaryInputField;
 
+    public InputField StartDate;
+    public InputField EndDate;  
+
 
     public void CreateMeeting()
     {

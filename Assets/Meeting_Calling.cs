@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Meeting_Calling : MonoBehaviour
 {
     public static Meeting_Calling instance;
-    private static string BASE_URL = "https://agent-meet-backend.chillkro.com/api/meeting/create_meeting/";
+    private static string BASE_URL = "https://agent-meet-backend.chillkro.com";
 
     private void Awake()
     {
@@ -80,7 +80,7 @@ public class Meeting_Calling : MonoBehaviour
         string json = JsonUtility.ToJson(request);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
 
-        using (UnityWebRequest www = new UnityWebRequest(BASE_URL, "POST"))
+        using (UnityWebRequest www = new UnityWebRequest(BASE_URL + "/api/meeting/create_meeting/", "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();

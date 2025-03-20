@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class VRDropdown : MonoBehaviour
 {
@@ -19,8 +20,36 @@ public class VRDropdown : MonoBehaviour
         dropdownButton.onClick.AddListener(ToggleDropdown);
         dropdownPanel.SetActive(false);
 
-        // Initialize the dropdown with options
-        List<string> options = new List<string> { "Option 1", "Option 2", "Option 3" };
+        // Wait for 0.4 seconds before fetching agents
+        StartCoroutine(DelayedAgentFetch(0.4f));
+    }
+
+    private IEnumerator DelayedAgentFetch(float delay)
+    {
+        Debug.Log("Starting DelayedAgentFetch...");
+        yield return new WaitForSeconds(delay);
+        Debug.Log("Fetching agents after delay...");
+        agentCalling.instance.GetAgent(PopulateDropdown);
+    }
+
+    public void PopulateDropdown(List<agentCalling.Agent> agents)
+    {
+        Debug.Log("PopulateDropdown() called with " + (agents != null ? agents.Count : 0) + " agents");
+
+        if (agents == null || agents.Count == 0)
+        {
+            Debug.LogError("No agents found inside PopulateDropdown!");
+            return;
+        }
+
+        // Extract agent names
+        List<string> options = new List<string>();
+        foreach (var agent in agents)
+        {
+            options.Add(agent.name);
+        }
+
+        // Populate the dropdown with fetched agent names
         InitializeDropdown(options);
     }
 
@@ -33,7 +62,6 @@ public class VRDropdown : MonoBehaviour
         }
         spawnedOptions.Clear();
 
-        // Check if prefab is assigned
         if (optionPrefab == null)
         {
             Debug.LogError("Option Prefab is missing! Assign it in the Inspector.");
@@ -52,7 +80,7 @@ public class VRDropdown : MonoBehaviour
 
             if (optionButton != null)
             {
-                optionButton.onClick.RemoveAllListeners(); // Prevent duplicate event calls
+                optionButton.onClick.RemoveAllListeners();
                 optionButton.onClick.AddListener(() => SelectOption(option));
             }
             else
@@ -64,16 +92,14 @@ public class VRDropdown : MonoBehaviour
             newOption.SetActive(true);
         }
 
-        // Refresh UI
         LayoutRebuilder.ForceRebuildLayoutImmediate(optionsContainer.GetComponent<RectTransform>());
     }
 
-    // Function to update selected text and close dropdown
     void SelectOption(string optionText)
     {
         selectedText.text = optionText;
-        dropdownPanel.SetActive(false); // Close dropdown immediately
-        isDropdownOpen = false; // Ensure dropdown state is updated
+        dropdownPanel.SetActive(false);
+        isDropdownOpen = false;
     }
 
     void ToggleDropdown()

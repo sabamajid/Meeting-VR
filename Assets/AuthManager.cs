@@ -135,6 +135,8 @@ public class AuthManager : MonoBehaviour
 
                 // Save the tokens
                 PlayerPrefs.SetString("access_token", response.tokens.access);
+                PlayerPrefs.Save(); // Ensure the token is saved
+
                 PlayerPrefs.SetString("refresh_token", response.tokens.refresh);
 
                 // Optionally save user info (if needed)

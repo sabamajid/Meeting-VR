@@ -6,11 +6,14 @@ using System.Collections;
 
 public class VRDropdown : MonoBehaviour
 {
-    public Button dropdownButton; // Button to open dropdown
-    public TextMeshProUGUI selectedText; // Displays selected option
-    public GameObject dropdownPanel; // The Scroll View panel
-    public Transform optionsContainer; // Content inside Scroll View
-    public GameObject optionPrefab; // Prefab for each option button
+    public enum DropdownType { User, Agent }
+    public DropdownType dropdownType;  // Set this in the Inspector
+
+    public Button dropdownButton;
+    public TextMeshProUGUI selectedText;
+    public GameObject dropdownPanel;
+    public Transform optionsContainer;
+    public GameObject optionPrefab;
 
     private bool isDropdownOpen = false;
     private List<GameObject> spawnedOptions = new List<GameObject>();
@@ -20,36 +23,60 @@ public class VRDropdown : MonoBehaviour
         dropdownButton.onClick.AddListener(ToggleDropdown);
         dropdownPanel.SetActive(false);
 
-        // Wait for 0.4 seconds before fetching agents
-        StartCoroutine(DelayedAgentFetch(0.4f));
+        // Identify the dropdown type and fetch data accordingly
+        if (dropdownType == DropdownType.Agent)
+        {
+            StartCoroutine(DelayedAgentFetch(0.4f));
+        }
+        else if (dropdownType == DropdownType.User)
+        {
+            StartCoroutine(DelayedUserFetch(0.4f));
+        }
     }
 
     private IEnumerator DelayedAgentFetch(float delay)
     {
-        Debug.Log("Starting DelayedAgentFetch...");
         yield return new WaitForSeconds(delay);
-        Debug.Log("Fetching agents after delay...");
-        agentCalling.instance.GetAgent(PopulateDropdown);
+        agentCalling.instance.GetAgent(PopulateDropdownForAgents);
     }
 
-    public void PopulateDropdown(List<agentCalling.Agent> agents)
+    private IEnumerator DelayedUserFetch(float delay)
     {
-        Debug.Log("PopulateDropdown() called with " + (agents != null ? agents.Count : 0) + " agents");
+        yield return new WaitForSeconds(delay);
+        UserCalling.instance.GetUsers(PopulateDropdownForUsers);
+    }
 
+    // Populate dropdown for Agents
+    public void PopulateDropdownForAgents(List<agentCalling.Agent> agents)
+    {
         if (agents == null || agents.Count == 0)
         {
-            Debug.LogError("No agents found inside PopulateDropdown!");
+            Debug.LogError("No agents found!");
             return;
         }
 
-        // Extract agent names
         List<string> options = new List<string>();
         foreach (var agent in agents)
         {
             options.Add(agent.name);
         }
+        InitializeDropdown(options);
+    }
 
-        // Populate the dropdown with fetched agent names
+    // Populate dropdown for Users
+    public void PopulateDropdownForUsers(List<UserCalling.User> users)
+    {
+        if (users == null || users.Count == 0)
+        {
+            Debug.LogError("No users found!");
+            return;
+        }
+
+        List<string> options = new List<string>();
+        foreach (var user in users)
+        {
+            options.Add(user.first_name + " " + user.last_name); // Full name for users
+        }
         InitializeDropdown(options);
     }
 
@@ -64,11 +91,10 @@ public class VRDropdown : MonoBehaviour
 
         if (optionPrefab == null)
         {
-            Debug.LogError("Option Prefab is missing! Assign it in the Inspector.");
+            Debug.LogError("Option Prefab is missing!");
             return;
         }
 
-        // Generate options
         foreach (string option in options)
         {
             GameObject newOption = Instantiate(optionPrefab, optionsContainer);

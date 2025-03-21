@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene/Main Menu.unity
     guid: 2966f87d4a7ccba47900db78f32e8c22
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Registration 1.unity
     guid: 1aecbb10bea086e4999eef518e752efe
   - enabled: 1

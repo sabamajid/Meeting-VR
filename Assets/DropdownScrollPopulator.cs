@@ -5,18 +5,27 @@ using TMPro;
 
 public class DropdownScrollPopulator : MonoBehaviour
 {
-    public TMP_Text textMesh;  // Assign your TextMeshProUGUI field in the Inspector
+    public TMP_Text textMesh;  // Assign your TextMeshProUGUI field
     public GameObject buttonPrefab;  // Assign your button prefab
     public Transform contentPanel;  // Assign the Content panel in the Scroll View
 
     private string lastText = "";
+    private bool isFirstChange = true; // Flag to ignore the first change
 
     void Update()
     {
         if (textMesh.text != lastText) // Detect text change
         {
             lastText = textMesh.text;
-            PopulateScrollView(lastText);
+
+            if (isFirstChange)
+            {
+                isFirstChange = false; // Skip the first update
+            }
+            else
+            {
+                PopulateScrollView(lastText);
+            }
         }
     }
 

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
+using TMPro; // Import TextMeshPro
 
 public class Meeting_Calling : MonoBehaviour
 {
     public static Meeting_Calling instance;
     private static string BASE_URL = "https://agent-meet-backend.chillkro.com";
+    public TextMeshProUGUI debugText; // Reference to TextMeshPro UI
 
     private void Awake()
     {
@@ -60,7 +62,7 @@ public class Meeting_Calling : MonoBehaviour
 
     public void CreateMeeting(string title, string description, string startTime, string endTime, string summary, int[] agentIds, int[] userIds)
     {
-        Debug.Log("Creating Meeting...");
+        DebugLog("Creating Meeting...");
         MeetingRequest request = new MeetingRequest
         {
             title = title,
@@ -93,7 +95,7 @@ public class Meeting_Calling : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Authorization token not found!");
+                DebugLog("Authorization token not found!");
                 yield break;
             }
 
@@ -101,15 +103,24 @@ public class Meeting_Calling : MonoBehaviour
 
             if (www.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Meeting Created Successfully: " + www.downloadHandler.text);
+                DebugLog("Meeting Created Successfully: " + www.downloadHandler.text);
                 MeetingResponse response = JsonUtility.FromJson<MeetingResponse>(www.downloadHandler.text);
-                Debug.Log("Meeting Link: " + response.data.meeting_link);
+                DebugLog("Meeting Link: " + response.data.meeting_link);
             }
             else
             {
-                Debug.LogError("Meeting Creation Failed: " + www.error);
-                Debug.LogError("Response: " + www.downloadHandler.text);
+                DebugLog("Meeting Creation Failed: " + www.error);
+                DebugLog("Response: " + www.downloadHandler.text);
             }
+        }
+    }
+
+    private void DebugLog(string message)
+    {
+        Debug.Log(message);
+        if (debugText != null)
+        {
+            debugText.text += message + "\n"; // Append message to TextMeshPro
         }
     }
 }

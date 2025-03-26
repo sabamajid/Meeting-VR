@@ -28,25 +28,25 @@ public class MeetingInputUIManager : MonoBehaviour
         if (string.IsNullOrEmpty(descriptionInputField.text))
         {
             Debug.Log("Description cannot be empty.");
-            return;
+        
         }
 
         if (string.IsNullOrEmpty(startDateText.text))
         {
             Debug.Log("Start date cannot be empty.");
-            return;
+           
         }
 
         if (string.IsNullOrEmpty(endDateText.text))
         {
             Debug.Log("End date cannot be empty.");
-            return;
+           
         }
 
         if (string.IsNullOrEmpty(summaryInputField.text))
         {
             Debug.Log("Summary cannot be empty.");
-            return;
+           
         }
 
         // Fetch users and agents, then create meeting
@@ -55,13 +55,11 @@ public class MeetingInputUIManager : MonoBehaviour
             if (userIds.Count == 0)
             {
                 Debug.Log("No users selected.");
-                return;
             }
 
             if (agentIds.Count == 0)
             {
                 Debug.Log("No agents selected.");
-                return;
             }
 
             // Convert List<int> to int[] for compatibility with CreateMeeting

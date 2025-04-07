@@ -1,35 +1,32 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; // Needed for button interaction
+using UnityEngine.UI;
 
 public class AllMeetingDescriptions : MonoBehaviour
 {
     public TextMeshProUGUI titleText, startTimeText, endTimeText, descriptionText;
-    public Button openDetailButton; // Assign this in the Inspector;
+    public Button openDetailButton;
 
     private string title, startTime, endTime, description;
+    private string meetingLink;
 
-    public void SetMeetingData(string title, string startTime, string endTime, string description)
+    public void SetMeetingData(string title, string startTime, string endTime, string description, string meetingLink)
     {
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.meetingLink = meetingLink;
 
         titleText.text = title;
         startTimeText.text = string.IsNullOrEmpty(startTime) ? "N/A" : startTime;
         endTimeText.text = string.IsNullOrEmpty(endTime) ? "N/A" : endTime;
         descriptionText.text = description;
 
-        openDetailButton.onClick.AddListener(OpenDetailScreen);
-
-       
-
-    }
-
-    private void OpenDetailScreen()
-    {
-        DetailMeetingScreen.instance.ShowMeetingDetails(title, startTime, endTime, description);
-       
+        openDetailButton.onClick.RemoveAllListeners();
+        openDetailButton.onClick.AddListener(() =>
+        {
+            DetailMeetingScreen.instance.ShowMeetingDetails(title, startTime, endTime, description, meetingLink);
+        });
     }
 }

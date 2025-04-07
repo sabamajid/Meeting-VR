@@ -31,7 +31,7 @@ public class ContentGenerator : MonoBehaviour
             AllMeetingDescriptions meetingDesc = meetingGO.GetComponent<AllMeetingDescriptions>();
             if (meetingDesc != null)
             {
-                meetingDesc.SetMeetingData(meeting.title, meeting.start_time, meeting.end_time, meeting.description);
+                meetingDesc.SetMeetingData(meeting.title, meeting.start_time, meeting.end_time, meeting.description, meeting.meeting_link);
             }
         }
     }

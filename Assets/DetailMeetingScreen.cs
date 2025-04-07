@@ -5,37 +5,57 @@ public class DetailMeetingScreen : MonoBehaviour
 {
     public static DetailMeetingScreen instance;
 
-    public GameObject screenPanel; // Assign the Detail Meeting Screen in the Inspector
-    public TextMeshProUGUI titleText, startTimeText, endTimeText, descriptionText;
+    public GameObject screenPanel;
+    public TextMeshProUGUI titleText, startTimeText, endTimeText, descriptionText, meetingLinkText;
+
+    private string meetingLink; // store it internally too in case you want to open/copy later
 
     private void Awake()
     {
-        instance = this;  // Singleton instance
-        screenPanel.SetActive(false); // Hide screen at start
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        instance = this;
+        screenPanel.SetActive(false);
     }
 
-    public void ShowMeetingDetails(string title, string startTime, string endTime, string description)
+    public void ShowMeetingDetails(string title, string startTime, string endTime, string description, string meetingLink)
     {
         titleText.text = title;
         startTimeText.text = string.IsNullOrEmpty(startTime) ? "N/A" : startTime;
         endTimeText.text = string.IsNullOrEmpty(endTime) ? "N/A" : endTime;
         descriptionText.text = description;
 
-        screenPanel.SetActive(true); // Show screen
-        GameObject allMeetingsPanel = GameObject.FindWithTag("All Meetings");
+        this.meetingLink = meetingLink;
+        meetingLinkText.text = string.IsNullOrEmpty(meetingLink) ? "No meeting link" : meetingLink;
 
+        screenPanel.SetActive(true);
+
+        GameObject allMeetingsPanel = GameObject.FindWithTag("All Meetings");
         if (allMeetingsPanel != null)
         {
             allMeetingsPanel.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("No GameObject found with the tag 'All Meetings'");
         }
     }
 
     public void HideMeetingDetails()
     {
-        screenPanel.SetActive(false); // Hide screen when close button is clicked
+        screenPanel.SetActive(false);
+    }
+
+    // OPTIONAL: Call this from a button click to open the link
+    public void OpenMeetingLink()
+    {
+        if (!string.IsNullOrEmpty(meetingLink))
+        {
+            Application.OpenURL(meetingLink);
+        }
+        else
+        {
+            Debug.LogWarning("No meeting link to open.");
+        }
     }
 }

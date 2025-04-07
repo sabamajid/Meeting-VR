@@ -141,6 +141,7 @@ MonoBehaviour:
   startTimeText: {fileID: 1646378453206831246}
   endTimeText: {fileID: 427244587589402307}
   descriptionText: {fileID: 2731432709804952889}
+  openDetailButton: {fileID: 2655881596391639676}
 --- !u!1 &2227051165148881040
 GameObject:
   m_ObjectHideFlags: 0

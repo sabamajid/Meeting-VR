@@ -1,55 +1,31 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI; // Needed for button interaction
 
 public class AllMeetingDescriptions : MonoBehaviour
 {
-    public TextMeshProUGUI titleText;
-    public TextMeshProUGUI startTimeText;
-    public TextMeshProUGUI endTimeText;
-    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI titleText, startTimeText, endTimeText, descriptionText;
+    public Button openDetailButton; // Assign this in the Inspector
 
-    public GameObject meetingDetailsPanel; // Reference to the details screen
-
-    public TextMeshProUGUI detailsTitle;
-    public TextMeshProUGUI detailsStartTime;
-    public TextMeshProUGUI detailsEndTime;
-    public TextMeshProUGUI detailsDescription;
-
-    private void Start()
-    {
-        // Ensure the panel is hidden at the start
-        if (meetingDetailsPanel != null)
-        {
-            meetingDetailsPanel.SetActive(false);
-        }
-    }
+    private string title, startTime, endTime, description;
 
     public void SetMeetingData(string title, string startTime, string endTime, string description)
     {
+        this.title = title;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
+
         titleText.text = title;
         startTimeText.text = string.IsNullOrEmpty(startTime) ? "N/A" : startTime;
         endTimeText.text = string.IsNullOrEmpty(endTime) ? "N/A" : endTime;
         descriptionText.text = description;
+
+        openDetailButton.onClick.AddListener(OpenDetailScreen);
     }
 
-    // Call this when a meeting is clicked
-    public void ShowMeetingDetails()
+    private void OpenDetailScreen()
     {
-        if (meetingDetailsPanel != null)
-        {
-            meetingDetailsPanel.SetActive(true);
-            detailsTitle.text = titleText.text;
-            detailsStartTime.text = startTimeText.text;
-            detailsEndTime.text = endTimeText.text;
-            detailsDescription.text = descriptionText.text;
-        }
-    }
-
-    public void CloseMeetingDetails()
-    {
-        if (meetingDetailsPanel != null)
-        {
-            meetingDetailsPanel.SetActive(false);
-        }
+        DetailMeetingScreen.instance.ShowMeetingDetails(title, startTime, endTime, description);
     }
 }

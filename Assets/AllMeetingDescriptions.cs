@@ -5,7 +5,7 @@ using UnityEngine.UI; // Needed for button interaction
 public class AllMeetingDescriptions : MonoBehaviour
 {
     public TextMeshProUGUI titleText, startTimeText, endTimeText, descriptionText;
-    public Button openDetailButton; // Assign this in the Inspector
+    public Button openDetailButton; // Assign this in the Inspector;
 
     private string title, startTime, endTime, description;
 
@@ -22,10 +22,14 @@ public class AllMeetingDescriptions : MonoBehaviour
         descriptionText.text = description;
 
         openDetailButton.onClick.AddListener(OpenDetailScreen);
+
+       
+
     }
 
     private void OpenDetailScreen()
     {
         DetailMeetingScreen.instance.ShowMeetingDetails(title, startTime, endTime, description);
+       
     }
 }

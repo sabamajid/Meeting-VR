@@ -22,6 +22,16 @@ public class DetailMeetingScreen : MonoBehaviour
         descriptionText.text = description;
 
         screenPanel.SetActive(true); // Show screen
+        GameObject allMeetingsPanel = GameObject.FindWithTag("All Meetings");
+
+        if (allMeetingsPanel != null)
+        {
+            allMeetingsPanel.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("No GameObject found with the tag 'All Meetings'");
+        }
     }
 
     public void HideMeetingDetails()

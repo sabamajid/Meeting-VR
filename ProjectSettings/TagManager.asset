@@ -9,6 +9,17 @@ TagManager:
   - Anchor
   - PlayerHand
   - Destroyer
+  - QDSUITextSecondaryColor
+  - QDSUIToggleBorderlessButton
+  - QDSUIIcon
+  - QDSUIToggleButton
+  - QDSUISharedThemeColor
+  - QDSUITooltip
+  - QDSUIAccentColor
+  - QDSUIBorderlessButton
+  - QDSUIToggleSwitch
+  - QDSUISecondaryButton
+  - All Meetings
   layers:
   - Default
   - TransparentFX
